@@ -121,7 +121,6 @@ class Engine {
         // Keep looping until we find a free enemy spot at random
         while (!enemySpot || this.enemies[enemySpot]) {
             enemySpot = Math.floor(Math.random() * enemySpots);
-            console.log(enemySpot)
         }
 
         this.enemies[enemySpot] = new Enemy((enemySpot * ENEMY_WIDTH) - ENEMY_WIDTH);
@@ -199,8 +198,23 @@ class Engine {
     }
 
     isPlayerDead() {
-        // TODO: fix this function!
-        return false;
+
+        var check = 0;
+
+        this.enemies.forEach((enemy, enemyIdx) => { 
+            //console.log(enemyIdx)
+            if ((enemy.y >= this.player.y && this.player.x == enemy.x) && enemy.y < GAME_HEIGHT+this.player.y) {
+                console.log(this.player.x + " " + enemy.x)
+                check = 1
+            }
+        });
+
+        if (check == 1) {
+            return true;
+        } else {
+            return false;
+        }
+        
     }
 }
 
