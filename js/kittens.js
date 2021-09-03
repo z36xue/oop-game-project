@@ -120,7 +120,8 @@ class Engine {
         var enemySpot;
         // Keep looping until we find a free enemy spot at random
         while (!enemySpot || this.enemies[enemySpot]) {
-            enemySpot = Math.ceil(Math.random() * enemySpots);
+            enemySpot = (Math.floor(Math.random() * enemySpots)) + 1;
+            console.log(enemySpot)
         }
 
         this.enemies[enemySpot] = new Enemy(enemySpot * ENEMY_WIDTH);
