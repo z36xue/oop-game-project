@@ -203,8 +203,8 @@ class Engine {
 
         this.enemies.forEach((enemy, enemyIdx) => { 
             //console.log(enemyIdx)
-            if ((enemy.y >= this.player.y && this.player.x == enemy.x) && enemy.y < GAME_HEIGHT+this.player.y) {
-                console.log(this.player.x + " " + enemy.x)
+            if ((enemy.y >= this.player.y-(ENEMY_HEIGHT) && this.player.x == enemy.x) && enemy.y < GAME_HEIGHT) {
+                console.log(this.player.y + " " + enemy.y)
                 check = 1
             }
         });
