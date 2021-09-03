@@ -28,31 +28,38 @@ var images = {};
 
 
 
-
-class Enemy {
-    constructor(xPos) {
-        this.x = xPos;
-        this.y = -ENEMY_HEIGHT;
-        this.sprite = images['enemy.png'];
-
-        // Each enemy should have a different speed
-        this.speed = Math.random() / 2 + 0.25;
-    }
-
-    update(timeDiff) {
-        this.y = this.y + timeDiff * this.speed;
-    }
-
+class Entity {
     render(ctx) {
         ctx.drawImage(this.sprite, this.x, this.y);
     }
 }
 
-class Player {
+class Enemy extends Entity {
+    constructor(xPos) {
+        super(xPos);
+        this.x = xPos;
+        this.y = -ENEMY_HEIGHT;
+        this.sprite = images['enemy.png'];
+        // Each enemy should have a different speed
+        this.speed = Math.random() / 2 + 0.25;
+
+    }
+    
+    
+
+    update(timeDiff) {
+        this.y = this.y + timeDiff * this.speed;
+    }
+
+}
+
+class Player extends Entity {
     constructor() {
+        super();
         this.x = 2 * PLAYER_WIDTH;
         this.y = GAME_HEIGHT - PLAYER_HEIGHT - 10;
         this.sprite = images['player.png'];
+        
     }
 
     // This method is called by the game engine when left/right arrows are pressed
@@ -65,10 +72,8 @@ class Player {
         }
     }
 
-    render(ctx) {
-        ctx.drawImage(this.sprite, this.x, this.y);
-    }
 }
+
 
 
 
