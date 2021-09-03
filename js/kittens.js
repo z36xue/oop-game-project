@@ -119,18 +119,18 @@ class Engine {
 
         var enemySpot;
         // Keep looping until we find a free enemy spot at random
-        while (!enemySpot) {
-            enemySpot = ((Math.floor(Math.random() * enemySpots)));
+        while (!enemySpot || this.enemies[enemySpot]) {
+            enemySpot = Math.floor(Math.random() * enemySpots);
             console.log(enemySpot)
         }
 
-        this.enemies[enemySpot] = new Enemy(enemySpot * ENEMY_WIDTH);
+        this.enemies[enemySpot] = new Enemy((enemySpot * ENEMY_WIDTH) - ENEMY_WIDTH);
     }
 
     // This method kicks off the game
     start() {
         this.score = 0;
-        this.lastFrame = Date.now();
+        this.lastFrame = Date.now(); 
 
         // Listen for keyboard left/right and update the player
         document.addEventListener('keydown', e => {
