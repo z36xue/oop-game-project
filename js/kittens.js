@@ -12,10 +12,14 @@ var PLAYER_HEIGHT = 54;
 // These two constants keep us from using "magic numbers" in our code
 var LEFT_ARROW_CODE = 37;
 var RIGHT_ARROW_CODE = 39;
+var DOWN_ARROW_CODE = 40;
+var UP_ARROW_CODE = 38;
 
 // These two constants allow us to DRY
 var MOVE_LEFT = 'left';
 var MOVE_RIGHT = 'right';
+var MOVE_UP = 'up';
+var MOVE_DOWN = 'down';
 
 // Preload game images
 var images = {};
@@ -70,8 +74,13 @@ class Player extends Entity {
         else if (direction === MOVE_RIGHT && this.x < GAME_WIDTH - PLAYER_WIDTH) {
             this.x = this.x + PLAYER_WIDTH;
         }
+        else if (direction === MOVE_DOWN && this.y < GAME_HEIGHT - 2 * PLAYER_HEIGHT) {
+            this.y = this.y + PLAYER_HEIGHT;
+        }
+        else if (direction === MOVE_UP && this.y > PLAYER_HEIGHT) {
+            this.y = this.y - PLAYER_HEIGHT;
+        }
     }
-
 }
 
 
@@ -143,6 +152,12 @@ class Engine {
             }
             else if (e.keyCode === RIGHT_ARROW_CODE) {
                 this.player.move(MOVE_RIGHT);
+            }
+            else if (e.keyCode === DOWN_ARROW_CODE) {
+                this.player.move(MOVE_DOWN);
+            }
+            else if (e.keyCode === UP_ARROW_CODE) {
+                this.player.move(MOVE_UP);
             }
         });
 
